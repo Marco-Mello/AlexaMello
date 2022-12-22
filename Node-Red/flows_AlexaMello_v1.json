@@ -1,0 +1,145 @@
+[
+    {
+        "id": "4cb06725aee48e9f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "303112b51206787a",
+        "type": "vsh-virtual-device",
+        "z": "4cb06725aee48e9f",
+        "name": "LED Quarto",
+        "topic": "",
+        "connection": "3aa4f03b7cbc2498",
+        "template": "COLOR_CHANGING_LIGHT_BULB",
+        "retrievable": false,
+        "passthrough": false,
+        "diff": false,
+        "filter": false,
+        "filterTopic": false,
+        "plan": "free",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "d6524b58d569d5c8"
+            ]
+        ]
+    },
+    {
+        "id": "6b9223a8138517e4",
+        "type": "debug",
+        "z": "4cb06725aee48e9f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d6524b58d569d5c8",
+        "type": "function",
+        "z": "4cb06725aee48e9f",
+        "name": "function 1",
+        "func": "\nmsg.payload= msg.payload.powerState + \"_\" + msg.payload.brightness + \"_\" + msg.payload.color_hex;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 360,
+        "wires": [
+            [
+                "6dccd936cfddfe20"
+            ]
+        ]
+    },
+    {
+        "id": "ea311579f9cab41c",
+        "type": "http in",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "url": "/LEDQuartoStatus",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 440,
+        "wires": [
+            [
+                "ec1e151f399423f3"
+            ]
+        ]
+    },
+    {
+        "id": "f7d728339fd4815f",
+        "type": "http response",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "6dccd936cfddfe20",
+        "type": "file",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "filename": "LEDQuartoStatus",
+        "filenameType": "str",
+        "appendNewline": false,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "6b9223a8138517e4"
+            ]
+        ]
+    },
+    {
+        "id": "ec1e151f399423f3",
+        "type": "file in",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "filename": "LEDQuartoStatus",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "f7d728339fd4815f"
+            ]
+        ]
+    },
+    {
+        "id": "3aa4f03b7cbc2498",
+        "type": "vsh-connection",
+        "name": "marcomello.e@gmail.com",
+        "port": "8883",
+        "accessTokenExpiry": "1670354141975",
+        "debug": true,
+        "backendUrl": "https://kfd5m4a21f.execute-api.eu-west-1.amazonaws.com/dev",
+        "lwaClientId": "amzn1.application-oa2-client.3f1bb07133854b078261ad43f2484c18"
+    }
+]

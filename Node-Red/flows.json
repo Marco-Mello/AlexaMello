@@ -1,0 +1,209 @@
+[
+    {
+        "id": "4cb06725aee48e9f",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "303112b51206787a",
+        "type": "vsh-virtual-device",
+        "z": "4cb06725aee48e9f",
+        "name": "LED Quarto",
+        "topic": "",
+        "connection": "3aa4f03b7cbc2498",
+        "template": "SWITCH",
+        "retrievable": false,
+        "passthrough": false,
+        "diff": false,
+        "filter": false,
+        "filterTopic": false,
+        "plan": "free",
+        "x": 210,
+        "y": 300,
+        "wires": [
+            [
+                "5703a6776ad658b1",
+                "6b9223a8138517e4",
+                "d6524b58d569d5c8"
+            ]
+        ]
+    },
+    {
+        "id": "5703a6776ad658b1",
+        "type": "switch",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "property": "payload.powerState",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ON",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 500,
+        "wires": [
+            [
+                "9b5e637d52f0b78f"
+            ],
+            [
+                "57a6d92d4cfbf2fc"
+            ]
+        ]
+    },
+    {
+        "id": "03c87ca85c3d95a7",
+        "type": "debug",
+        "z": "4cb06725aee48e9f",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "9b5e637d52f0b78f",
+        "type": "http request",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://g1.globo.com",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 450,
+        "y": 480,
+        "wires": [
+            [
+                "03c87ca85c3d95a7"
+            ]
+        ]
+    },
+    {
+        "id": "57a6d92d4cfbf2fc",
+        "type": "http request",
+        "z": "4cb06725aee48e9f",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "https://www.uol.com.br",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "bf7c79f1c20ee1a4"
+            ]
+        ]
+    },
+    {
+        "id": "bf7c79f1c20ee1a4",
+        "type": "debug",
+        "z": "4cb06725aee48e9f",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "6b9223a8138517e4",
+        "type": "debug",
+        "z": "4cb06725aee48e9f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload.powerState",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "d6524b58d569d5c8",
+        "type": "function",
+        "z": "4cb06725aee48e9f",
+        "name": "function 1",
+        "func": "var obj={\n    \"powerState\":\"\",\n    \"source\":\"\",\n    \"directive\":\"\",\n    \"name\":\"\",\n    \"type\":\"\",\n}\nmsg.payload=obj;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "c8b186cf62c3b08b"
+            ]
+        ]
+    },
+    {
+        "id": "c8b186cf62c3b08b",
+        "type": "debug",
+        "z": "4cb06725aee48e9f",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3aa4f03b7cbc2498",
+        "type": "vsh-connection",
+        "name": "marcomello.e@gmail.com",
+        "port": "8883",
+        "accessTokenExpiry": "1670354141975",
+        "debug": true,
+        "backendUrl": "https://kfd5m4a21f.execute-api.eu-west-1.amazonaws.com/dev",
+        "lwaClientId": "amzn1.application-oa2-client.3f1bb07133854b078261ad43f2484c18"
+    }
+]
